@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliotheca | Personal Book Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-background"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="logo-text">Bibliotheca</div>
+                </div>
+                <div class="header-actions">
+                    <div class="theme-toggle" id="theme-toggle">
+                        <div class="toggle-slider"></div>
+                        <i class="fas fa-sun toggle-icon sun"></i>
+                        <i class="fas fa-moon toggle-icon moon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-value" id="total-books">0</div>
+                <div class="stat-label">Total Books</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="available-books">0</div>
+                <div class="stat-label">Available Now</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="borrowed-books">0</div>
+                <div class="stat-label">Currently Borrowed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="categories-count">0</div>
+                <div class="stat-label">Categories</div>
+            </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="panel">
+                    <h3 class="panel-title"><i class="fas fa-search"></i> Search Library</h3>
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" id="search-input" placeholder="Search books...">
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3 class="panel-title"><i class="fas fa-tags"></i> Categories</h3>
+                    <ul class="category-list" id="category-list">
+                        <!-- Categories populated by JS -->
+                    </ul>
+                </div>
+
+                <div class="panel">
+                    <h3 class="panel-title"><i class="fas fa-plus-circle"></i> Quick Actions</h3>
+                    <button class="btn btn-primary" id="add-book-btn">
+                        <i class="fas fa-book-medical"></i> Add New Book
+                    </button>
+                    <button class="btn btn-secondary" id="view-history-btn" style="margin-top: 16px;">
+                        <i class="fas fa-history"></i> View History
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main>
+                <div class="books-header">
+                    <h2 class="section-title">My Library Collection</h2>
+                    <div class="tabs">
+                        <div class="tab active" data-tab="all-books">All Books</div>
+                        <div class="tab" data-tab="available-books">Available</div>
+                        <div class="tab" data-tab="borrowed-books">Borrowed</div>
+                    </div>
+                </div>
+
+                <!-- Books Grid -->
+                <div class="tab-content active" id="all-books">
+                    <div class="books-grid" id="books-grid">
+                        <!-- Books populated by JS -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="available-books">
+                    <div class="books-grid" id="available-books-grid">
+                        <!-- Available books populated by JS -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="borrowed-books">
+                    <div class="books-grid" id="borrowed-books-grid">
+                        <!-- Borrowed books populated by JS -->
+                    </div>
+                </div>
+
+                <!-- History Table -->
+                <div class="tab-content" id="borrowing-history">
+                    <div class="history-table-container">
+                        <h3 class="panel-title"><i class="fas fa-history"></i> Borrowing History</h3>
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>Book</th>
+                                    <th>Borrower</th>
+                                    <th>Borrow Date</th>
+                                    <th>Return Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-table-body">
+                                <!-- History rows populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Bibliotheca</div>
+            <p>Your Personal Digital Library &copy; 2023</p>
+            <p>Track, organize and manage your book collection with elegance</p>
+        </div>
+    </footer>
+
+    <!-- Add Book Modal -->
+    <div class="modal" id="add-book-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Book</h3>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-book-form">
+                    <div class="form-group">
+                        <label class="form-label">Book Title</label>
+                        <input type="text" class="form-control" id="book-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Author</label>
+                        <input type="text" class="form-control" id="book-author" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-control" id="book-category" required>
+                            <option value="">Select Category</option>
+                            <option value="Fiction">Fiction</option>
+                            <option value="Non-Fiction">Non-Fiction</option>
+                            <option value="Science">Science</option>
+                            <option value="Biography">Biography</option>
+                            <option value="History">History</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Philosophy">Philosophy</option>
+                            <option value="Poetry">Poetry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">ISBN (Optional)</label>
+                        <input type="text" class="form-control" id="book-isbn">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus-circle"></i> Add to Library
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Borrow Book Modal -->
+    <div class="modal" id="borrow-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Borrow Book</h3>
+                <button class="close-modal" id="close-borrow-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="borrow-form">
+                    <div class="form-group">
+                        <label class="form-label">Borrower Name</label>
+                        <input type="text" class="form-control" id="borrower-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Borrow Date</label>
+                        <input type="date" class="form-control" id="borrow-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Expected Return Date</label>
+                        <input type="date" class="form-control" id="expected-return" required>
+                    </div>
+                    <input type="hidden" id="borrow-book-id">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-check"></i> Confirm Borrow
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
