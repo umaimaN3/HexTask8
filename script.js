@@ -1,5 +1,5 @@
 
-        // Sample book data
+        // Sample book data with real book cover images
         const initialBooks = [
             {
                 id: 1,
@@ -7,7 +7,9 @@
                 author: "Matt Haig",
                 category: "Fiction",
                 isbn: "9780525559474",
+                image: "img/img1.jpg",
                 status: "available",
+                rating: 4.2,
                 borrowHistory: []
             },
             {
@@ -16,7 +18,9 @@
                 author: "James Clear",
                 category: "Non-Fiction",
                 isbn: "9780735211292",
+                image: "img/img2.jpg",
                 status: "borrowed",
+                rating: 4.8,
                 borrowHistory: [
                     {
                         borrower: "Alex Johnson",
@@ -38,7 +42,9 @@
                 author: "Andy Weir",
                 category: "Science",
                 isbn: "9780593135204",
+                image: "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "available",
+                rating: 4.7,
                 borrowHistory: []
             },
             {
@@ -47,7 +53,9 @@
                 author: "Tara Westover",
                 category: "Biography",
                 isbn: "9780399590504",
+                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "available",
+                rating: 4.5,
                 borrowHistory: []
             },
             {
@@ -56,7 +64,9 @@
                 author: "Yuval Noah Harari",
                 category: "History",
                 isbn: "9780062316097",
+                image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "borrowed",
+                rating: 4.6,
                 borrowHistory: [
                     {
                         borrower: "Michael Chen",
@@ -72,7 +82,9 @@
                 author: "J.R.R. Tolkien",
                 category: "Fantasy",
                 isbn: "9780547928227",
+                image: "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "available",
+                rating: 4.9,
                 borrowHistory: []
             },
             {
@@ -81,7 +93,9 @@
                 author: "Alex Michaelides",
                 category: "Mystery",
                 isbn: "9781250301697",
+                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "available",
+                rating: 4.3,
                 borrowHistory: []
             },
             {
@@ -90,7 +104,9 @@
                 author: "Robert C. Martin",
                 category: "Technology",
                 isbn: "9780132350884",
+                image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "borrowed",
+                rating: 4.7,
                 borrowHistory: [
                     {
                         borrower: "David Miller",
@@ -106,7 +122,9 @@
                 author: "Marcus Aurelius",
                 category: "Philosophy",
                 isbn: "9780140449334",
+                image: "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "available",
+                rating: 4.4,
                 borrowHistory: []
             },
             {
@@ -115,7 +133,9 @@
                 author: "Emily Dickinson",
                 category: "Poetry",
                 isbn: "9780571192181",
+                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                 status: "available",
+                rating: 4.5,
                 borrowHistory: []
             }
         ];
@@ -279,19 +299,27 @@
             
             booksArray.forEach(book => {
                 const currentBorrow = book.borrowHistory.find(record => record.status === 'borrowed');
+                const ratingStars = getRatingStars(book.rating);
                 
                 const bookCard = document.createElement('div');
                 bookCard.className = 'book-card';
                 bookCard.innerHTML = `
                     <div class="book-cover">
-                        <div class="book-cover-content">
-                            <i class="fas fa-book"></i>
+                        <img src="${book.image}" alt="${book.title}">
+                        <div class="book-cover-overlay">
+                            <span class="book-category-tag">${book.category}</span>
                         </div>
                     </div>
                     <div class="book-info">
                         <h3 class="book-title">${book.title}</h3>
                         <p class="book-author">${book.author}</p>
-                        <span class="book-category">${book.category}</span>
+                        <div class="book-meta">
+                            <div class="rating">
+                                ${ratingStars}
+                                <span style="margin-left: 6px;">${book.rating}</span>
+                            </div>
+                            <span>${book.isbn}</span>
+                        </div>
                         <div class="book-status">
                             <span class="status-badge ${book.status === 'available' ? 'status-available' : 'status-borrowed'}">
                                 ${book.status === 'available' ? 'Available' : 'Borrowed'}
@@ -321,6 +349,24 @@
                     }
                 });
             });
+        }
+
+        // Get rating stars HTML
+        function getRatingStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for (let i = 1; i <= 5; i++) {
+                if (i <= fullStars) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === fullStars + 1 && hasHalfStar) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
         }
 
         // Render borrowing history
@@ -402,13 +448,23 @@
         }
 
         // Add book
-        function addBook(title, author, category, isbn) {
+        function addBook(title, author, category, isbn, imageUrl) {
+            const defaultImages = [
+                "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            ];
+            
+            const randomDefaultImage = defaultImages[Math.floor(Math.random() * defaultImages.length)];
+            
             const newBook = {
                 id: books.length > 0 ? Math.max(...books.map(b => b.id)) + 1 : 1,
                 title,
                 author,
                 category,
                 isbn: isbn || '',
+                image: imageUrl || randomDefaultImage,
+                rating: (Math.random() * 1 + 4).toFixed(1), // Random rating between 4.0 and 5.0
                 status: 'available',
                 borrowHistory: []
             };
@@ -585,8 +641,9 @@
                 const author = document.getElementById('book-author').value;
                 const category = document.getElementById('book-category').value;
                 const isbn = document.getElementById('book-isbn').value;
+                const imageUrl = document.getElementById('book-image').value;
                 
-                addBook(title, author, category, isbn);
+                addBook(title, author, category, isbn, imageUrl);
                 addBookForm.reset();
                 addBookModal.style.display = 'none';
             });
@@ -613,4 +670,3 @@
 
         // Initialize the app
         init();
-    
