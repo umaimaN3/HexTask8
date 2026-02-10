@@ -1,144 +1,143 @@
-
-        // Sample book data with real book cover images
-        const initialBooks = [
+// Sample book data with real book cover images
+const initialBooks = [
+    {
+        id: 1,
+        title: "The Midnight Library",
+        author: "Matt Haig",
+        category: "Fiction",
+        isbn: "9780525559474",
+        image: "img/img1.jpg",
+        status: "available",
+        rating: 4.2,
+        borrowHistory: []
+    },
+    {
+        id: 2,
+        title: "Atomic Habits",
+        author: "James Clear",
+        category: "Non-Fiction",
+        isbn: "9780735211292",
+        image: "img/img2.jpg",
+        status: "borrowed",
+        rating: 4.8,
+        borrowHistory: [
             {
-                id: 1,
-                title: "The Midnight Library",
-                author: "Matt Haig",
-                category: "Fiction",
-                isbn: "9780525559474",
-                image: "img/img1.jpg",
-                status: "available",
-                rating: 4.2,
-                borrowHistory: []
+                borrower: "Alex Johnson",
+                borrowDate: "2023-06-15",
+                returnDate: "2023-07-15",
+                status: "returned"
             },
             {
-                id: 2,
-                title: "Atomic Habits",
-                author: "James Clear",
-                category: "Non-Fiction",
-                isbn: "9780735211292",
-                image: "img/img2.jpg",
-                status: "borrowed",
-                rating: 4.8,
-                borrowHistory: [
-                    {
-                        borrower: "Alex Johnson",
-                        borrowDate: "2023-06-15",
-                        returnDate: "2023-07-15",
-                        status: "returned"
-                    },
-                    {
-                        borrower: "Sarah Williams",
-                        borrowDate: "2023-08-20",
-                        returnDate: null,
-                        status: "borrowed"
-                    }
-                ]
-            },
-            {
-                id: 3,
-                title: "Project Hail Mary",
-                author: "Andy Weir",
-                category: "Science",
-                isbn: "9780593135204",
-                image: "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "available",
-                rating: 4.7,
-                borrowHistory: []
-            },
-            {
-                id: 4,
-                title: "Educated",
-                author: "Tara Westover",
-                category: "Biography",
-                isbn: "9780399590504",
-                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "available",
-                rating: 4.5,
-                borrowHistory: []
-            },
-            {
-                id: 5,
-                title: "Sapiens: A Brief History of Humankind",
-                author: "Yuval Noah Harari",
-                category: "History",
-                isbn: "9780062316097",
-                image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "borrowed",
-                rating: 4.6,
-                borrowHistory: [
-                    {
-                        borrower: "Michael Chen",
-                        borrowDate: "2023-09-10",
-                        returnDate: null,
-                        status: "borrowed"
-                    }
-                ]
-            },
-            {
-                id: 6,
-                title: "The Hobbit",
-                author: "J.R.R. Tolkien",
-                category: "Fantasy",
-                isbn: "9780547928227",
-                image: "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "available",
-                rating: 4.9,
-                borrowHistory: []
-            },
-            {
-                id: 7,
-                title: "The Silent Patient",
-                author: "Alex Michaelides",
-                category: "Mystery",
-                isbn: "9781250301697",
-                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "available",
-                rating: 4.3,
-                borrowHistory: []
-            },
-            {
-                id: 8,
-                title: "Clean Code",
-                author: "Robert C. Martin",
-                category: "Technology",
-                isbn: "9780132350884",
-                image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "borrowed",
-                rating: 4.7,
-                borrowHistory: [
-                    {
-                        borrower: "David Miller",
-                        borrowDate: "2023-09-01",
-                        returnDate: null,
-                        status: "borrowed"
-                    }
-                ]
-            },
-            {
-                id: 9,
-                title: "Meditations",
-                author: "Marcus Aurelius",
-                category: "Philosophy",
-                isbn: "9780140449334",
-                image: "https://images.unsplash.com/photo-1531346688376-ab6275c4725e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "available",
-                rating: 4.4,
-                borrowHistory: []
-            },
-            {
-                id: 10,
-                title: "The Complete Poems",
-                author: "Emily Dickinson",
-                category: "Poetry",
-                isbn: "9780571192181",
-                image: "https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-                status: "available",
-                rating: 4.5,
-                borrowHistory: []
+                borrower: "Sarah Williams",
+                borrowDate: "2023-08-20",
+                returnDate: null,
+                status: "borrowed"
             }
-        ];
+        ]
+    },
+    {
+        id: 3,
+        title: "Project Hail Mary",
+        author: "Andy Weir",
+        category: "Science",
+        isbn: "9780593135204",
+        image: "img/img3.jpg",
+        status: "available",
+        rating: 4.7,
+        borrowHistory: []
+    },
+    {
+        id: 4,
+        title: "Educated",
+        author: "Tara Westover",
+        category: "Biography",
+        isbn: "9780399590504",
+        image: "img/img4.jpg",
+        status: "available",
+        rating: 4.5,
+        borrowHistory: []
+    },
+    {
+        id: 5,
+        title: "Sapiens: A Brief History of Humankind",
+        author: "Yuval Noah Harari",
+        category: "History",
+        isbn: "9780062316097",
+        image: "img/img5.jpg",
+        status: "borrowed",
+        rating: 4.6,
+        borrowHistory: [
+            {
+                borrower: "Michael Chen",
+                borrowDate: "2023-09-10",
+                returnDate: null,
+                status: "borrowed"
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: "The Hobbit",
+        author: "J.R.R. Tolkien",
+        category: "Fantasy",
+        isbn: "9780547928227",
+        image: "img/img6.jpg",
+        status: "available",
+        rating: 4.9,
+        borrowHistory: []
+    },
+    {
+        id: 7,
+        title: "The Silent Patient",
+        author: "Alex Michaelides",
+        category: "Mystery",
+        isbn: "9781250301697",
+        image: "img/img7.jpg",
+        status: "available",
+        rating: 4.3,
+        borrowHistory: []
+    },
+    {
+        id: 8,
+        title: "Clean Code",
+        author: "Robert C. Martin",
+        category: "Technology",
+        isbn: "9780132350884",
+        image: "img/img8.jpg",
+        status: "borrowed",
+        rating: 4.7,
+        borrowHistory: [
+            {
+                borrower: "David Miller",
+                borrowDate: "2023-09-01",
+                returnDate: null,
+                status: "borrowed"
+            }
+        ]
+    },
+    {
+        id: 9,
+        title: "Meditations",
+        author: "Marcus Aurelius",
+        category: "Philosophy",
+        isbn: "9780140449334",
+        image: "img/img9.jpg",
+        status: "available",
+        rating: 4.4,
+        borrowHistory: []
+    },
+    {
+        id: 10,
+        title: "The Complete Poems",
+        author: "Emily Dickinson",
+        category: "Poetry",
+        isbn: "9780571192181",
+        image: "img/img10.jpg",
+        status: "available",
+        rating: 4.5,
+        borrowHistory: []
+    }
+];
 
         // Initialize app
         let books = JSON.parse(localStorage.getItem('bibliothecaBooks')) || initialBooks;
@@ -282,74 +281,74 @@
             renderBooksToGrid(borrowedBooks, borrowedBooksGrid);
         }
 
-        // Render books to grid
         function renderBooksToGrid(booksArray, gridElement) {
-            gridElement.innerHTML = '';
-            
-            if (booksArray.length === 0) {
-                gridElement.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-book-open"></i>
-                        <h3>No books found</h3>
-                        <p>Try a different search or add new books to your library</p>
+    gridElement.innerHTML = '';
+    
+    if (booksArray.length === 0) {
+        gridElement.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-book-open"></i>
+                <h3>No books found</h3>
+                <p>Try a different search or add new books to your library</p>
+            </div>
+        `;
+        return;
+    }
+    
+    booksArray.forEach(book => {
+        const ratingStars = getRatingStars(book.rating);
+        const fallbackImage = `https://ui-avatars.com/api/?name=${encodeURIComponent(book.title)}&background=6e8efb&color=fff&size=256&bold=true`;
+        
+        const bookCard = document.createElement('div');
+        bookCard.className = 'book-card';
+        bookCard.innerHTML = `
+            <div class="book-cover">
+                <img src="${book.image}" alt="${book.title}" 
+                     onerror="this.onerror=null; this.src='${fallbackImage}';">
+                <div class="book-cover-overlay">
+                    <span class="book-category-tag">${book.category}</span>
+                </div>
+            </div>
+            <div class="book-info">
+                <h3 class="book-title">${book.title}</h3>
+                <p class="book-author">${book.author}</p>
+                <div class="book-meta">
+                    <div class="rating">
+                        ${ratingStars}
+                        <span>${book.rating}</span>
                     </div>
-                `;
-                return;
-            }
-            
-            booksArray.forEach(book => {
-                const currentBorrow = book.borrowHistory.find(record => record.status === 'borrowed');
-                const ratingStars = getRatingStars(book.rating);
-                
-                const bookCard = document.createElement('div');
-                bookCard.className = 'book-card';
-                bookCard.innerHTML = `
-                    <div class="book-cover">
-                        <img src="${book.image}" alt="${book.title}">
-                        <div class="book-cover-overlay">
-                            <span class="book-category-tag">${book.category}</span>
-                        </div>
-                    </div>
-                    <div class="book-info">
-                        <h3 class="book-title">${book.title}</h3>
-                        <p class="book-author">${book.author}</p>
-                        <div class="book-meta">
-                            <div class="rating">
-                                ${ratingStars}
-                                <span style="margin-left: 6px;">${book.rating}</span>
-                            </div>
-                            <span>${book.isbn}</span>
-                        </div>
-                        <div class="book-status">
-                            <span class="status-badge ${book.status === 'available' ? 'status-available' : 'status-borrowed'}">
-                                ${book.status === 'available' ? 'Available' : 'Borrowed'}
-                            </span>
-                            ${book.status === 'available' ? 
-                                `<button class="action-btn borrow-btn" data-id="${book.id}">Borrow</button>` : 
-                                `<button class="action-btn return-btn" data-id="${book.id}">Return</button>`
-                            }
-                        </div>
-                    </div>
-                `;
-                
-                gridElement.appendChild(bookCard);
-            });
-            
-            // Add event listeners to buttons
-            gridElement.querySelectorAll('.borrow-btn, .return-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const bookId = parseInt(this.getAttribute('data-id'));
-                    const book = books.find(b => b.id === bookId);
-                    
-                    if (book.status === 'available') {
-                        currentBookToBorrow = bookId;
-                        borrowModal.style.display = 'flex';
-                    } else {
-                        returnBook(bookId);
+                    <span>ISBN: ${book.isbn}</span>
+                </div>
+                <div class="book-status">
+                    <span class="status-badge ${book.status === 'available' ? 'status-available' : 'status-borrowed'}">
+                        ${book.status === 'available' ? 'Available' : 'Borrowed'}
+                    </span>
+                    ${book.status === 'available' ? 
+                        `<button class="action-btn borrow-btn" data-id="${book.id}">Borrow</button>` : 
+                        `<button class="action-btn return-btn" data-id="${book.id}">Return</button>`
                     }
-                });
-            });
-        }
+                </div>
+            </div>
+        `;
+        
+        gridElement.appendChild(bookCard);
+    });
+    
+    // Add event listeners to buttons
+    gridElement.querySelectorAll('.borrow-btn, .return-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const bookId = parseInt(this.getAttribute('data-id'));
+            const book = books.find(b => b.id === bookId);
+            
+            if (book.status === 'available') {
+                currentBookToBorrow = bookId;
+                borrowModal.style.display = 'flex';
+            } else {
+                returnBook(bookId);
+            }
+        });
+    });
+}
 
         // Get rating stars HTML
         function getRatingStars(rating) {
@@ -670,3 +669,23 @@
 
         // Initialize the app
         init();
+        // Test function to verify images
+function testImages() {
+    console.log("Testing images...");
+    books.forEach(book => {
+        console.log(`Book: ${book.title}`);
+        console.log(`Image URL: ${book.image}`);
+        
+        // Create a test image to check if it loads
+        const testImg = new Image();
+        testImg.onload = () => console.log(`✓ ${book.title} - Image loaded successfully`);
+        testImg.onerror = () => console.log(`✗ ${book.title} - Image failed to load`);
+        testImg.src = book.image;
+    });
+}
+
+// Call test after init
+init();
+setTimeout(testImages, 1000);   
+// Clear old data
+localStorage.removeItem('bibliothecaBooks');
